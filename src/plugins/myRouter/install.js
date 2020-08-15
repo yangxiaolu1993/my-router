@@ -1,5 +1,5 @@
 
-import MyRouter from '.'
+import MyRouter from './index'
 import MyRouterLink from './router/link'
 import MyRouterView from './router/view'
 
@@ -19,6 +19,12 @@ MyRouter.install = function(Vue,options){
             // 利用 Vue defineReactive 监听当前路由的变化
             Vue.util.defineReactive(this._myRouter,'current')
             
+            // 当前实例添加 $router 实例
+            Object.defineProperty(this,'$myRouter',{
+                get(){
+                    return this._myRouter
+                }
+            })
             // 为当前实例添加 $route 属性
             Object.defineProperty(this,'$myRoute',{
                 get(){

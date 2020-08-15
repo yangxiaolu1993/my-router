@@ -13,7 +13,11 @@ export default {
     }
   },
   mounted(){
-   console.log(this.$myRoute)
+  //  console.log(this.$myRouter.__proto__.push())
+    console.log(this.$myRouter)
+    this.$myRouter.push({
+      name:'cart'
+    })
   },
   methods:{
 

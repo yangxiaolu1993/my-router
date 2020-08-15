@@ -33,6 +33,27 @@ class MyRouter {
             }
         })
     }
+
+    push(params){
+        console.log(params)
+        window.location.href = this.getUrl(params.name)
+    }
+
+    replace(params){
+        window.location.replace(this.getUrl(params.name))
+    }
+
+    go(n){
+        window.history.go(n)
+    }
+
+    getUrl(path){
+        const fullPath = window.location.href
+        const pos = fullPath.indexOf('#')
+        const p = pos > 0?fullPath.slice(0,pos):fullPath
+
+        return `${p}#/${path}`
+    }
 }
 
 export default MyRouter

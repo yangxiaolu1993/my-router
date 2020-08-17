@@ -1,5 +1,6 @@
 import Hash from './hash'
 import History from './history'
+import { pathToRegexp } from 'path-to-regexp'
 
 class MyRouter {
     constructor(options){
@@ -54,13 +55,15 @@ class MyRouter {
         let pathMap = {} // 以每个路由的路径创建 key value map
 
         routes.forEach((route)=>{
-
+            
+            let regex = route.path == '*'?'':pathToRegexp(route.path)
+            
             let record = {
                 path:route.path || '/',
                 component:route.component,
                 meta:route.meta || {},
                 name:route.name || '',
-                regex:'' // 正则表达式匹配，用于hash路由 :userId 匹配
+                regex:regex // 正则表达式匹配，用于hash路由 :userId 匹配
             }
 
             if(route.name){

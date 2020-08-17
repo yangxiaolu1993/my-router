@@ -1,18 +1,34 @@
-
+import { exec } from 'path-to-regexp'
 export default class Hash {
     constructor(router){
         this.router = router
     }
     init(){
-     
+
+        this.createRoute()
+        
         // 监听 hash 值改变
         window.addEventListener('hashchange', this.handleHashChange.bind(this))
     }
     handleHashChange(){
+        
+        this.createRoute()
+    }
 
-        let path = location.hash.slice(1)       
-        let route = this.router.routesMap.pathMap[path]
+    createRoute(){
+        let path = location.hash.slice(1)    
        
+        let route = this.router.routesMap.pathMap[path] 
+
+        // 匹配路由 path = '/my/:userId'
+        if(!route){
+            const routeMap = this.router.routesMap.pathMap
+            for(let key in routeMap){
+                if(routeMap[key].regex && routeMap[key].regex.exec(path)) route = routeMap[key]
+            }
+        }
+        
+        // 更新路由
         this.router.current = {
             name: route.name || '',
             meta: route.meta || {},
@@ -24,8 +40,8 @@ export default class Hash {
             component: route.component
         }  
     }
-
     push(params){
+        console.log(params)
         window.location.href = this.getUrl(params.name)
     }
 

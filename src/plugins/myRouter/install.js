@@ -9,6 +9,8 @@ MyRouter.install = function(Vue,options){
         beforeCreate(){
             // console.log('全局混入 beforeCreate')
             if (this.$options && this.$options.myRouter){ 
+                console.log('路由初始化 ')
+                this.$options.myRouter.init()
                 // 如果是根组件
                 this._myRouter = this.$options.myRouter;
             }else { 
@@ -28,13 +30,7 @@ MyRouter.install = function(Vue,options){
             // 为当前实例添加 $route 属性
             Object.defineProperty(this,'$myRoute',{
                 get(){
-
-                    let current = this._myRouter.current
-                    let currentRouter = this._myRouter.routes.filter(item=>{ 
-                        return item.path == current
-                    })
-                   
-                    return currentRouter[0]
+                    return this._myRouter.current
                 }
             })
         }

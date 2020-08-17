@@ -2,11 +2,7 @@ export default {
     name: 'MyRouterView',
     functional: true,
     render: (createElement, {props, children, parent, data}) => {
-
-        let currentRoute = parent._myRouter.current
-        let routesMap = parent._myRouter.routesMap
-
-        // console.log(parent.$myRoute)
+        console.log(parent)
         let temp = parent.$myRoute?parent.$myRoute.component:''
         return createElement(temp)
     }

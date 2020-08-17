@@ -17,10 +17,11 @@ const routes = [
     { path: '/classify',name: 'classify',component: Classify,meta:{title:'首页'} }, // 分类
     { path: '/my/:userId',name: 'my',component: My,meta:{title:'首页'} }, // 我的
 
-    { path: '*', redirect: '#/index' },
+    { path: '*', redirect: { name: 'index' } },
 ]
 
 const router = new myRouter({
+    mode:'hash',
     routes
 })
 

@@ -26,14 +26,14 @@ export default {
     }
   },
   mounted(){
-    
+    console.log(this.$myRouter)
   },
   methods:{
 
     jump(obj){
       
       if(obj.route != ''){
-        this.$myRouter.replace({
+        this.$myRouter.push({
           name:obj.route
         })
       }

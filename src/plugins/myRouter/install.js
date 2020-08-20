@@ -1,6 +1,7 @@
 
 import MyRouter from './index'
 import MyRouterLink from './router/link'
+// import MyRouterLink from './routerTemplate/routerLink'
 import MyRouterView from './router/view'
 
 MyRouter.install = function(Vue,options){
@@ -17,10 +18,6 @@ MyRouter.install = function(Vue,options){
                 //如果是子组件
                 this._myRouter= this.$parent && this.$parent._myRouter
             }
-            
-            // 利用 Vue defineReactive 监听当前路由的变化
-            Vue.util.defineReactive(this._myRouter,'current')
-            
             // 当前实例添加 $router 实例
             Object.defineProperty(this,'$myRouter',{
                 get(){
@@ -33,6 +30,8 @@ MyRouter.install = function(Vue,options){
                     return this._myRouter.current
                 }
             })
+            // 利用 Vue defineReactive 监听当前路由的变化
+            Vue.util.defineReactive(this._myRouter,'current')
         }
     })
 
@@ -42,7 +41,6 @@ MyRouter.install = function(Vue,options){
 
     // 自定义组件 - <my-router-link>
     Vue.component(MyRouterLink.name, MyRouterLink)
-
     
 }
 

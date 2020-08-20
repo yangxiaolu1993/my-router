@@ -1,28 +1,23 @@
 <template>
-  <div class="hash-router">
-      <h3>hash router Cart</h3>
-  </div>
+    <div>this is Foo</div>
 </template>
 
 <script>
 export default {
-  name: 'HashRouterHome',
+  name: 'Foo',
   data () {
     return {
       
     }
   },
   mounted(){
+    console.log(this.$myRouter)
   },
-  methods:{
 
-   
-  }
 }
 </script>
 
 
 <style lang="scss" scoped>
-@import '../../assets/css/router/index.scss';
 </style>
 

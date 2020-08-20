@@ -3,8 +3,8 @@
         <my-router-link to="home">首页</my-router-link>
         <my-router-link to='classify'>分类</my-router-link>
         <my-router-link to='cart'>购物车</my-router-link>
-        <my-router-link :to="{name:'my',params:{userId: 123}}">我的</my-router-link>
-    </div>
+        <!-- <my-router-link :to="{name:'my',params:{userId: 123}}">我的</my-router-link> -->
+  </div>
 </template>
 
 <script>
@@ -14,6 +14,9 @@ export default {
     return {
       
     }
+  },
+  mounted(){
+    // console.log(this.$options)
   }
 }
 </script>

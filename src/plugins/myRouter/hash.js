@@ -1,4 +1,4 @@
-import { exec } from 'path-to-regexp'
+import Utils from './utils'
 export default class Hash {
     constructor(router){
         this.router = router
@@ -16,9 +16,11 @@ export default class Hash {
     }
 
     createRoute(){
-        let path = location.hash.slice(1)    
        
-        let route = this.router.routesMap.pathMap[path] 
+        let path = location.hash.slice(1)?location.hash.slice(1):'/'
+     
+        let route = this.router.routesMap.pathMap[path]
+      
 
         // 匹配路由 path = '/my/:userId'
         if(!route){
@@ -41,24 +43,45 @@ export default class Hash {
         }  
     }
     push(params){
-        console.log(params)
-        window.location.href = this.getUrl(params.name)
+        
+        history.pushState(null, '', this.getPath(params))
+        this.handleHashChange() 
     }
-
     replace(params){
-        window.location.replace(this.getUrl(params.name))
+        window.location.replace(this.getUrl(params))
     }
 
     go(n){
         window.history.go(n)
     }
     // 获取当前路由
-    getUrl(path){
+    getUrl(params){
+
+        let path = ''
+        if(Utils.getProperty(params) == 'string'){
+            path = params
+        } else if(params.name || params.path){
+            path = params.name?params.name:params.path
+        }
+
         const fullPath = window.location.href
         const pos = fullPath.indexOf('#')
         const p = pos > 0?fullPath.slice(0,pos):fullPath
 
         return `${p}#/${path}`
+    }
+
+    getPath(params){
+        
+        let path = ''
+        if(params.name){
+            path = '#'+this.router.routesMap.nameMap[params.name].path
+            
+        }else{
+            path = Utils.getProperty(params) == 'String'?params:params.path
+        }
+
+        return path
     }
 
     

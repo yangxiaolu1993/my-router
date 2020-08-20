@@ -2,7 +2,7 @@ export default {
     name: 'MyRouterView',
     functional: true,
     render: (createElement, {props, children, parent, data}) => {
-        console.log(parent)
+      
         let temp = parent.$myRoute?parent.$myRoute.component:''
         return createElement(temp)
     }

@@ -8,7 +8,6 @@ MyRouter.install = function(Vue,options){
 
     Vue.mixin({
         beforeCreate(){
-            // console.log('全局混入 beforeCreate')
             if (this.$options && this.$options.myRouter){ 
                 console.log('路由初始化 ')
                 this.$options.myRouter.init()
@@ -18,20 +17,23 @@ MyRouter.install = function(Vue,options){
                 //如果是子组件
                 this._myRouter= this.$parent && this.$parent._myRouter
             }
-            // 当前实例添加 $router 实例
-            Object.defineProperty(this,'$myRouter',{
-                get(){
-                    return this._myRouter
-                }
-            })
-            // 为当前实例添加 $route 属性
-            Object.defineProperty(this,'$myRoute',{
-                get(){
-                    return this._myRouter.current
-                }
-            })
+            
             // 利用 Vue defineReactive 监听当前路由的变化
             Vue.util.defineReactive(this._myRouter,'current')
+        }
+    })
+
+    
+    // 当前实例添加 $router 实例
+    Object.defineProperty(Vue.prototype,'$myRouter',{
+        get(){
+            return this._myRouter
+        }
+    })
+    // 为当前实例添加 $route 属性
+    Object.defineProperty(Vue.prototype,'$myRoute',{
+        get(){
+            return this._myRouter.current
         }
     })
 

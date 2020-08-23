@@ -1,12 +1,11 @@
 import Utils from './utils'
-export default class Hash {
+export default class HashRouter {
     constructor(router){
         this.router = router
     }
     init(){
 
-        this.createRoute()
-        
+        this.createRoute()     
         // 监听 hash 值改变
         window.addEventListener('hashchange', this.handleHashChange.bind(this))
     }
@@ -17,11 +16,9 @@ export default class Hash {
 
     createRoute(){
        
-        let path = location.hash.slice(1)?location.hash.slice(1):'/'
-     
+        let path = location.hash.slice(1)?location.hash.slice(1):'/'   
         let route = this.router.routesMap.pathMap[path]
       
-
         // 匹配路由 path = '/my/:userId'
         if(!route){
             const routeMap = this.router.routesMap.pathMap
@@ -43,46 +40,31 @@ export default class Hash {
         }  
     }
     push(params){
-        
         history.pushState(null, '', this.getPath(params))
         this.handleHashChange() 
     }
     replace(params){
-        window.location.replace(this.getUrl(params))
+        history.replaceState(null, '', this.getPath(params))
+        this.handleHashChange() 
     }
 
     go(n){
         window.history.go(n)
     }
-    // 获取当前路由
-    getUrl(params){
-
-        let path = ''
-        if(Utils.getProperty(params) == 'string'){
-            path = params
-        } else if(params.name || params.path){
-            path = params.name?params.name:params.path
-        }
-
-        const fullPath = window.location.href
-        const pos = fullPath.indexOf('#')
-        const p = pos > 0?fullPath.slice(0,pos):fullPath
-
-        return `${p}#/${path}`
-    }
 
     getPath(params){
-        
-        let path = ''
+        let path = '#'
         if(params.name){
-            path = '#'+this.router.routesMap.nameMap[params.name].path
-            
+            path += this.getRegularPath(this.router.routesMap.nameMap[params.name].path)
         }else{
-            path = Utils.getProperty(params) == 'String'?params:params.path
+            path += this.getRegularPath(Utils.getProperty(params) == 'String'?params:params.path)
         }
 
         return path
     }
 
+    getRegularPath(path){
+        return path.indexOf('/')<0?`/${path}`:path
+    }
     
 }

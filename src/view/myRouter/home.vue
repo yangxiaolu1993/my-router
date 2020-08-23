@@ -13,7 +13,7 @@ export default {
     }
   },
   mounted(){
-   console.log(this.$myRoute)
+    console.log(this.$myRoute)
   },
   methods:{
 

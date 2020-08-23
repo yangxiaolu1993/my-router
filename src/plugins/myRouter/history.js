@@ -1,5 +1,5 @@
 import Utils from './utils'
-export default class History {
+export default class HistoryRouter {
     constructor(router){
         this.router = router
     }
@@ -12,12 +12,12 @@ export default class History {
         })
     }
     createRoute(params){
-           
+        // console.log(params)
         let route = {}
         if(params.name){
             route = this.router.routesMap.nameMap[params.name]
         }else{
-            let path = Utils.getProperty(params) == 'String'?params:params.path
+            let path = this.getRegularPath(Utils.getProperty(params) == 'String'?params:params.path)
             route = this.router.routesMap.pathMap[path]
         }
         
@@ -53,7 +53,7 @@ export default class History {
         if(params.name){
             path = this.router.routesMap.nameMap[params.name].path
         }else{
-            path = Utils.getProperty(params) == 'String'?params:params.path
+            path = this.getRegularPath(Utils.getProperty(params) == 'String'?params:params.path)
         }
 
         return path
@@ -62,5 +62,9 @@ export default class History {
     getLocation () {
         let path = decodeURI(window.location.pathname)
         return (path || '/') + window.location.search + window.location.hash
+    }
+
+    getRegularPath(path){
+        return path.indexOf('/')<0?`/${path}`:path
     }
 }

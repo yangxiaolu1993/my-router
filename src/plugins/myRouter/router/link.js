@@ -19,34 +19,20 @@ export default {
     },
     render: (createElement, {props,parent,children}) => {
         
-        let toRoute = parent.$myRouter.mode == 'hash'?`#`:``
-
-        if(Utils.getProperty(props.to) == 'String'){
-            toRoute += `/${props.to}`
-        } else {
+        let toRoute = parent.$myRouter.mode == 'hash'?`#/`:``
+        
+        if( props.to.name ){
             let current = props.to.name
-            let currentRouter = parent._myRouter.routes.filter(item=>{ 
-                return item.name == current
-            })
-            let routeParams = props.to.params
-
-            if(routeParams){
-                for(let key in routeParams){
-                    if(currentRouter[0].path.indexOf(key) != -1){
-                        var reg = new RegExp(`:${key}`)
-                        currentRouter[0].path = currentRouter[0].path.replace(reg, routeParams[key])
-                    }
-                }
-                
-                toRoute += `${currentRouter[0].path}`
-            } 
+            toRoute += parent._myRouter.routesMap.nameMap[current].path
+        } else {
+            toRoute += Utils.getProperty(props.to) == 'String'?props.to:props.to.path
         }
 
         let on = {'click':guardEvent} // 触发导航的事件 a 标签阻止跳转
             
         on[props.event] = e=>{
             guardEvent(e)
-            parent.$myRouter.push(toRoute)
+            parent.$myRouter.push(props.to)
         }
 
         return createElement(props.tag,{
@@ -63,6 +49,8 @@ function guardEvent(e){
         e.preventDefault()
     }
 }
+
+
 
 
 // template 形式

@@ -1,5 +1,5 @@
-import Hash from './hash'
-import History from './history'
+import HashRouter from './hash'
+import HistoryRouter from './history'
 import Utils from './utils'
 
 class MyRouter {
@@ -20,13 +20,13 @@ class MyRouter {
         } // 记录当前路由
         switch (options.mode) {
             case 'hash':
-                this.history = new Hash(this)
+                this.history = new HashRouter(this)
                 break
             case 'history':
-                this.history = new History(this)
+                this.history = new HistoryRouter(this)
                 break
             default:
-                this.history = new Hash(this)
+                this.history = new HashRouter(this)
         }
     }
 

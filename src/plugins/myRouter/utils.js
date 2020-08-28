@@ -48,6 +48,44 @@ class Utils{
             pathMap
         }
     }
+
+    extractGuards(records,name,bind,reverse){
+        const guards = flatMapComponents(records, (def, instance, match, key) => {
+    
+            const guard = extractGuard(def, name)
+            
+            if (guard) {
+              return Array.isArray(guard)
+                ? guard.map(guard => bind(guard, instance, match, key))
+                : bind(guard, instance, match, key)
+            }
+        })
+         
+        return flatten(reverse ? guards.reverse() : guards)
+    }
+
+    flatMapComponents(matched,fn){
+        return flatten(matched.map(m => {
+            return Object.keys(m.components).map(key => fn(
+              m.components[key],
+              m.instances[key],
+              m, key
+            ))
+        }))
+    }
+
+    matched.map(m => {
+        return Object.keys(m.components).map(key => {
+
+            const guard = extractGuard(m.components[key], name)
+            
+            if (guard) {
+              return Array.isArray(guard)
+                ? guard.map(guard => bind(guard, instance, match, key))
+                : bind(guard, instance, match, key)
+            }
+        })
+    })
 }
 
 export default new Utils()

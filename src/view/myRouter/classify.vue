@@ -13,12 +13,24 @@ export default {
     }
   },
   mounted(){
-   console.log(this.$myRoute)
+  //  console.log(this.$myRoute)
   },
   methods:{
 
    
-  }
+  },
+  beforeRouteEnter (to, from, next) {
+    console.log('classify 组件导航守卫 beforeRouteEnter')
+    next()
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('classify 组件导航守卫 beforeRouteUpdate')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('classify 组件导航守卫 beforeRouteLeave')
+    next()
+  },
 }
 </script>
 

@@ -9,7 +9,6 @@ MyRouter.install = function(Vue,options){
     Vue.mixin({
         beforeCreate(){
             if (this.$options && this.$options.myRouter){ 
-                console.log('路由初始化 ')
                 this.$options.myRouter.init()
                 // 如果是根组件
                 this._myRouter = this.$options.myRouter;

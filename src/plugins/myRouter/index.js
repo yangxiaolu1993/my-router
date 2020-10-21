@@ -7,16 +7,21 @@ class MyRouter {
         this.routes = options.routes || []
         this.mode = options.mode || 'hash' // 模式 hash || history
         this.routesMap = Utils.createMap(this.routes)
-        this.history = null
+        this.beforeHooks = [] // 全局导航守卫 before
+        this.afterHooks = [] // 全局导航守卫 after
+        this.history = null  
         this.current= {
             name: '',
             meta: {},
             path: '/',
-            hash: '',
-            query:{},
-            params: {},
+            // hash: '',
+            // query:{},
+            // params: {},
             fullPath: '',
-            component:null
+            component:null,
+            matchAs:undefined,
+            matched:[],
+            parent:undefined
         } // 记录当前路由
         switch (options.mode) {
             case 'hash':
@@ -32,6 +37,7 @@ class MyRouter {
 
     init(){
         this.history.init()
+        console.log(this.routesMap)
     }
 
     push(params){
@@ -45,8 +51,19 @@ class MyRouter {
     go(n){
         this.history.go(n)
     }
+    /**
+     * 全局路由导航 brefore
+     */
+    beforeEach(fn){
+        this.beforeHooks.push(fn)
+    }
+    /**
+     * 全局路由导航 after
+     */
+    afterEach(fn){
+        this.afterHooks.push(fn)
+    }
 
-    
 }
 
 export default MyRouter

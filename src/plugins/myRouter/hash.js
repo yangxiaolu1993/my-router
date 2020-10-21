@@ -36,7 +36,7 @@ export default class HashRouter {
             query:location.query || {},
             params: location.params || {},
             fullPath: location.href,
-            component: route.component
+            component: route.components
         }  
     }
     push(params){

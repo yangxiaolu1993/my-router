@@ -1,6 +1,7 @@
 <template>
   <div class="hash-router">
       <h3>hash router Home</h3>
+      <div @click="goChild">跳转子路由 my</div>
   </div>
 </template>
 
@@ -13,10 +14,28 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$myRoute)
+    // console.log(this.$myRoute)
+  },
+  beforeRouteEnter (to, from, next) {
+    console.log('home 组件导航守卫 beforeRouteEnter')
+   
+    next()
+  },
+  beforeRouteUpdate (to, from, next) {
+    console.log('home 组件导航守卫 beforeRouteUpdate')
+    next()
+  },
+  beforeRouteLeave (to, from, next) {
+    console.log('home 组件导航守卫 beforeRouteLeave')
+    next()
   },
   methods:{
-
+    goChild(){
+     
+      this.$myRouter.push({
+        name:'my'
+      })
+    }
    
   }
 }

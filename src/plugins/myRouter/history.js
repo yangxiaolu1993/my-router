@@ -8,7 +8,6 @@ export default class HistoryRouter {
         // 路由改变
         window.addEventListener('popstate', ()=>{
             this.createRoute(this.getLocation())
-            
         })
     }
     createRoute(params){
@@ -30,13 +29,17 @@ export default class HistoryRouter {
             query:location.query || {},
             params: location.params || {},
             fullPath: location.href,
-            component: route.component
+            component: route.components
         }  
+
     }
 
     push(params){
-        history.pushState(null, '', this.getPath(params))
-        this.createRoute(params)
+        // history.pushState(null, '', this.getPath(params))
+        // this.createRoute(params)
+        Utils.transitionTo(this.router,this.getPath(params),route=>{  
+            history.pushState(null, '', route)
+        })
     }
     replace(params){
         history.replaceState(null, '', this.getPath(params))

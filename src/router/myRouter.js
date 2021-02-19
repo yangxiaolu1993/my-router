@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import myRouter from '../plugins/myRouter/install'
 
-import Index from '../view/home'
+import Index from '../view/index'
 import Home from '../view/myRouter/home'
 import Cart from '../view/myRouter/cart'
 import Classify from '../view/myRouter/classify'
@@ -11,18 +11,20 @@ Vue.use(myRouter)
 
 const routes = [
     { path: '/',name: 'index',component: Index,meta:{title:'myRouter'} }, 
+    // 首页
     { 
         path: '/home',
         name: 'home',
         component: Home,
         children:[
-            { path: '/my',name: 'my',component: My,meta:{title:'首页'} }
+            { path: '/my',name: 'my',component: My,meta:{title:'首页-子页面'} }
         ],
         meta:{title:'首页'} 
-    }, // 首页
-    { path: '/cart',name: 'cart',component: Cart,meta:{title:'首页'} }, // 购物车
-    { path: '/classify',name: 'classify',component: Classify,meta:{title:'首页'} }, // 分类
-    // { path: '/my/:userId',name: 'my',component: My,meta:{title:'首页'} }, // 我的
+    }, 
+    // 购物车
+    { path: '/cart',name: 'cart',component: Cart,meta:{title:'首页'} }, 
+    // 分类
+    { path: '/classify',name: 'classify',component: Classify,meta:{title:'首页'} }, 
 ]
 
 const router = new myRouter({

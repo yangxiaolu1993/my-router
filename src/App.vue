@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <my-router-view/>
     <!-- 底部导航 -->
     <footer-nav></footer-nav>

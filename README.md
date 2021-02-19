@@ -1,6 +1,6 @@
 # my-router
 
-> 手写实现vue-router
+> 基于 Vue 实现属于自己的路由管理器 myRouter
 
 ## Build Setup
 
@@ -18,4 +18,4 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+

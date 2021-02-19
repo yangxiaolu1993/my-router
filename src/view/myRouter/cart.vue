@@ -1,6 +1,6 @@
 <template>
   <div class="hash-router">
-      <h3>hash router Cart</h3>
+      <h3>{{mode}} router Cart</h3>
   </div>
 </template>
 
@@ -9,28 +9,11 @@ export default {
   name: 'HashRouterHome',
   data () {
     return {
-      
+      mode:''
     }
   },
   mounted(){
-    // console.log(this.$myRoute)
-
-    // let onionArr = []
-
-    // onionArr.push((next)=>{
-    //   // console.log('1')
-    //   next()
-    // })
-
-    // onionArr.push((next)=>{
-    //   console.log('2')
-    //   next()
-    // })
-    // onionArr.push((next)=>{
-    //   console.log('3')
-    //   next()
-    // })
-    // this.onionModel(onionArr)
+    this.mode = this.$myRouter.mode
   },
   beforeRouteEnter (to, from, next) {
     console.log('cart 组件导航守卫 beforeRouteEnter')

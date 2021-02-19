@@ -1,6 +1,6 @@
 <template>
   <div class="hash-router">
-      <h3>hash router Classify</h3>
+      <h3>{{mode}} router Classify</h3>
   </div>
 </template>
 
@@ -9,11 +9,11 @@ export default {
   name: 'HashRouterHome',
   data () {
     return {
-      
+      mode:''
     }
   },
   mounted(){
-  //  console.log(this.$myRoute)
+    this.mode = this.$myRouter.mode
   },
   methods:{
 

@@ -1,6 +1,6 @@
 <template>
   <div class="hash-router">
-      <h3>hash router My</h3>
+      <h3>{{mode}} router My</h3>
   </div>
 </template>
 
@@ -9,11 +9,11 @@ export default {
   name: 'HashRouterHome',
   data () {
     return {
-      
+      mode:''
     }
   },
   mounted(){
-  //  console.log(this.$myRoute)
+    this.mode = this.$myRouter.mode
   },
   beforeRouteEnter (to, from, next) {
     console.log('my 组件导航守卫 beforeRouteEnter')

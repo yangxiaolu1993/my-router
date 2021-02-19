@@ -5,39 +5,22 @@ export default class HistoryRouter {
     }
 
     init(){
-        console.log(11)
+        /** 设置初始值 */
+        this.createRoute('/')
         // 路由改变
         window.addEventListener('popstate', ()=>{
             this.createRoute(this.getLocation())
         })
     }
     createRoute(params){
-        // console.log(params)
-        let route = {}
-        if(params.name){
-            route = this.router.routesMap.nameMap[params.name]
-        }else{
-            let path = this.getRegularPath(Utils.getProperty(params) == 'String'?params:params.path)
-            route = this.router.routesMap.pathMap[path]
-        }
-        
-        // 更新路由
-        this.router.current = {
-            name: route.name || '',
-            meta: route.meta || {},
-            path: route.path || '/',
-            hash: route.hash || '',
-            query:location.query || {},
-            params: location.params || {},
-            fullPath: location.href,
-            component: route.components
-        }  
-
+        console.log(params)
+        Utils.transitionTo(this.router,this.getPath(params),route=>{  
+            console.log('路由更新')
+        })
     }
 
     push(params){
-        // history.pushState(null, '', this.getPath(params))
-        // this.createRoute(params)
+        
         Utils.transitionTo(this.router,this.getPath(params),route=>{  
             history.pushState(null, '', route)
         })

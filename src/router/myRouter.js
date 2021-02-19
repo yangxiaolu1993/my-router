@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import myRouter from '../plugins/myRouter/install'
 
-import Index from '../view/index'
 import Home from '../view/myRouter/home'
 import Cart from '../view/myRouter/cart'
 import Classify from '../view/myRouter/classify'
@@ -10,7 +9,7 @@ import My from '../view/myRouter/my'
 Vue.use(myRouter)
 
 const routes = [
-    { path: '/',name: 'index',component: Index,meta:{title:'myRouter'} }, 
+    { path: '/',name: 'index',component: Home,meta:{title:'myRouter'} }, 
     // 首页
     { 
         path: '/home',

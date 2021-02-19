@@ -11,11 +11,16 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
+## 说明
 
+history 路由模式：
+
+1、实现了钩子函数
+2、默认初始化时展示路由 path 为 '/' 的组件
+
+hash 路由模式：
+
+1、未实现钩子函数
+2、默认初始化时展示路由 path 为 '/' 的组件

@@ -7,6 +7,7 @@ export default class HistoryRouter {
     init(){
         /** 设置初始值 */
         this.createRoute('/')
+        
         // 路由改变
         window.addEventListener('popstate', ()=>{
             this.createRoute(this.getLocation())

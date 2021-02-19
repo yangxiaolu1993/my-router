@@ -31,6 +31,9 @@ const router = new myRouter({
     routes
 })
 
+/** 
+ * 路由导航守卫
+ */
 router.beforeEach((to,from,next)=>{
     console.log('全局导航守卫  beforeEach')
     next()
